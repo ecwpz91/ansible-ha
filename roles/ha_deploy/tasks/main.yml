@@ -12,3 +12,12 @@
   ansible.builtin.yum:
     name: iscsi-initiator-utils
     state: latest
+    
+- name: Create initiator name
+  ansible.builtin.copy:
+    src: /etc/iscsi/initiatorname.iscsi
+    dest: /tmp/initiatorname.iscsi
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
