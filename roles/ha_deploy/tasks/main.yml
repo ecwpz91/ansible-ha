@@ -7,3 +7,8 @@
     username: root
     password: {{ rhel_ha_root_user_password }}
     pool_ids: {{ rhel_ha_pool_id }}
+
+- name: Install iSCSI utils
+  ansible.builtin.yum:
+    name: iscsi-initiator-utils
+    state: latest
