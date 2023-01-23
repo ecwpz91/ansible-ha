@@ -23,7 +23,20 @@
     discover: true
     target: "{{ iscsi_target[0] }}"
 
-- name: Create a volume group on top of /dev/sda1
-  community.general.lvg:
-    vg: vg_apache
-    pvs: /dev/sda1
+# - name: Create physical volume
+#   command: pvcreate /dev/sda1
+
+# - name: Create a volume group on top of /dev/sda1
+#   community.general.lvg:
+#     vg: vg_apache
+#     pvs: /dev/sda1
+
+- name: Test for initiatorname line
+  shell: grep -c "/dev/vg_apache/lv_apache" /etc/fstab || true
+  register: test_grep
+
+- name: Add entry into fstab
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "/dev/vg_apache/lv_apache /var/www ext4 defaults,_netdev,nofail 0 2"
+  when: test_grep.stdout == "0"
