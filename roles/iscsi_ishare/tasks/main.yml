@@ -82,6 +82,12 @@
     name: fence-agents-pve
     state: latest
 
+- name: Permit traffic in default zone for pcsd service
+  ansible.posix.firewalld:
+    service: high-availability
+    permanent: yes
+    state: enabled
+
 - name: Set HA user password
   ansible.builtin.user:
     name: hacluster
