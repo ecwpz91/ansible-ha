@@ -1,1 +1,2 @@
 iscsi_target_ip: 10.1.2.3
+hacluster_password: changeme

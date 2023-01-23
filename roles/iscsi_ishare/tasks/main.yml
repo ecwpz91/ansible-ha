@@ -81,3 +81,19 @@
   ansible.builtin.yum:
     name: fence-agents-pve
     state: latest
+
+- name: Set HA user password
+  ansible.builtin.user:
+    name: hacluster
+    state: present
+    password: "{{ hacluster_password | password_hash('sha512') }}"
+
+- name: Enable the pcsd daemon
+  ansible.builtin.service:
+    name: pcsd
+    enabled: yes
+
+- name: Start service pcsd daemon, if not started
+  ansible.builtin.service:
+    name: pcsd
+    state: started
