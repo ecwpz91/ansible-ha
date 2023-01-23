@@ -22,22 +22,16 @@
 
 - debug: msg="{{iscsi_iname}}"
 
-- name: Ensure file exists
-  copy:
-    content: "InitiatorName={{ iscsi_iname }}"
-    dest: /etc/iscsi/initiatorname.iscsi
-    force: false
-    group: root
-    owner: root
-    mode: 0644
+- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+  ansible.builtin.file:
+    path: /etc/iscsi/initiatorname.iscsi
+    state: touch
+    mode: u=rw,g=r,o=r
 
-- name: Create initiator name
-  ansible.builtin.copy:
-    src: /etc/iscsi/initiatorname.iscsi
-    dest: "/etc/iscsi/initiatorname.iscsi.{{ date }}"
-    owner: root
-    group: root
-    mode: '0644'
-    backup: yes
+- name: Add a line to a file if the file does not exist, without passing regexp
+  ansible.builtin.lineinfile:
+    path: /etc/iscsi/initiatorname.iscsi
+    line: "InitiatorName={{ iscsi_iname }}"
+
 
 
