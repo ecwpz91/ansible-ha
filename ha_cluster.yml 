@@ -15,4 +15,5 @@
 
     - name: Begin to deploy the migration toolkit
       ansible.builtin.include_role:
-        name: ../roles/ha_deploy
+        name: roles/ha_deploy
+
