@@ -39,8 +39,8 @@
   set_fact:
     iscsi_iname: "{{ slurped_user_data.content | b64decode | trim }}"
 
-- ansible.builtin.debug:
-    msg: "the value of initiatorname.iscsi is {{lookup('ansible.builtin.file', '/etc/iscsi/initiatorname.iscsi') }}"
+# - ansible.builtin.debug:
+#     msg: "the value of initiatorname.iscsi is {{lookup('ansible.builtin.file', '/etc/iscsi/initiatorname.iscsi') }}"
 
 - debug: msg="{{iscsi_iname}}"
   
