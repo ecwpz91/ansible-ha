@@ -31,6 +31,17 @@
 #     vg: vg_apache
 #     pvs: /dev/sda1
 
+# - name: Create logical volume
+#   community.general.lvol:
+#     vg: vg_apache
+#     lv: lv_apache
+#     size: +100%FREE
+
+# - name: Create a ext4 filesystem on /dev/sda1
+#   community.general.filesystem:
+#     fstype: ext4
+#     dev: /dev/vg_apache/lv_apache
+
 - name: Test for initiatorname line
   shell: grep -c "/dev/vg_apache/lv_apache" /etc/fstab || true
   register: test_grep
