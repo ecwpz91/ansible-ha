@@ -57,3 +57,8 @@
     service: http
     permanent: yes
     state: enabled
+
+- name: Configure apache resource agent to get the status of apache
+  ansible.builtin.template:
+    src: templates/status.conf.j2
+    dest: /etc/httpd/conf.d/status.conf
