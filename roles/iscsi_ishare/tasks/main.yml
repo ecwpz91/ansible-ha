@@ -18,6 +18,7 @@
 
 - name: Discover targets on portal and login to the one available
   community.general.open_iscsi:
-    portal: '{{ iscsi_target[0] }}'
+    portal: "{{ iscsi_target_ip }}"
     login: true
     discover: true
+    target: "{{ iscsi_target[0] }}"
