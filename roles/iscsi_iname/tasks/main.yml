@@ -21,7 +21,7 @@
     mode: u=rw,g=r,o=r
 
 - name: Test for initiatorname line
-  shell: grep -c "InitiatorName={{ iscsi_iname }}" /etc/iscsi/initiatorname.iscsi || true
+  shell: grep -c "InitiatorName=" /etc/iscsi/initiatorname.iscsi || true
   register: test_grep
 
 - name: Add a line to a file if the file does not exist
