@@ -1,3 +1,7 @@
 ---
 
 - debug: msg="{{ iscsi_iname }}"
+
+- debug: msg="{{ inventory_hostname }}"
+
+- debug: msg="{{ ansible_hostname}}"
