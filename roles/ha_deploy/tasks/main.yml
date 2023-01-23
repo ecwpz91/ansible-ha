@@ -28,14 +28,15 @@
     state: touch
     mode: u=rw,g=r,o=r
 
+- name: Test for line
+  shell: grep -c "InitiatorName={{ iscsi_iname }}" /etc/iscsi/initiatorname.iscsi || true
+  register: test_grep
+
 - name: Add a line to a file if the file does not exist, without passing regexp
   ansible.builtin.lineinfile:
     path: /etc/iscsi/initiatorname.iscsi
     line: "InitiatorName={{ iscsi_iname }}"
-    state: present
-  check_mode: yes
-  register: conf
-  failed_when: (conf is changed) or (conf is failed)
+  when: test_grep.stdout == "0"
 
 
 
