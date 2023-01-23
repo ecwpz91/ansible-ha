@@ -1,0 +1,7 @@
+---
+
+- name: Perform a discovery on 10.1.2.3 and show available target nodes
+  community.general.open_iscsi:
+    show_nodes: true
+    discover: true
+    ip: "{{ iscsi_target_ip }}"
