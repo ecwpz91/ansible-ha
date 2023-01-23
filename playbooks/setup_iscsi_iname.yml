@@ -15,7 +15,7 @@
       when:
         - demo_uuid is not defined
 
-    - name: Begin to deploy the migration toolkit
+    - name: Begin to setup the iSCSI iname
       ansible.builtin.include_role:
         name: roles/iscsi_iname
 
