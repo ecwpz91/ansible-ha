@@ -1,0 +1,20 @@
+- name: Setup iSCSI target
+  hosts: all
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+  tasks:
+    - name: Create unique id for the environment
+      block:
+        - name: create unique id for demo instance
+          ansible.builtin.shell:
+            cmd: uuidgen | cut -c1-4
+          register: demo_uuid_raw
+        - name: set unique id fact
+          ansible.builtin.set_fact:
+            demo_uuid: "{{ demo_uuid_raw.stdout }}"
+      when:
+        - demo_uuid is not defined
+
+    - name: Begin to setup the iSCSI target
+      ansible.builtin.include_role:
+        name: roles/iscsi_traget
