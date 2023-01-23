@@ -22,3 +22,8 @@
     login: true
     discover: true
     target: "{{ iscsi_target[0] }}"
+
+- name: Create a volume group on top of /dev/sda1
+  community.general.lvg:
+    vg: vg_apache
+    pvs: /dev/sda1
