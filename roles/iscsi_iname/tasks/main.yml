@@ -12,7 +12,7 @@
 - set_fact:
     iscsi_iname: "{{ command_output.stdout }}"
 
-- debug: msg="{{iscsi_iname}}"
+# - debug: msg="{{ iscsi_iname }}"
 
 - name: Touch initiatorname file (create if does not exist)
   ansible.builtin.file:
@@ -39,7 +39,7 @@
   set_fact:
     iscsi_iname: "{{ slurped_user_data.content | b64decode | trim }}"
 
-- debug: msg="{{iscsi_iname}}"
+- debug: msg="{{ iscsi_iname }}"
   
 
 
