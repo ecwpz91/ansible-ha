@@ -1,4 +1,4 @@
-- name: Setup iSCSI target
+- name: Setup iSCSI shared storage
   hosts: all
   tasks:
     - name: Create unique id for the environment
@@ -15,4 +15,4 @@
 
     - name: Begin to setup the iSCSI target
       ansible.builtin.include_role:
-        name: roles/iscsi_target
+        name: roles/iscsi_ishare
