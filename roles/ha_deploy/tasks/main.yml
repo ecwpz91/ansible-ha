@@ -1,12 +1,12 @@
 ---
 # tasks file for ha_deploy
 
-- name: Check if subscription is enabled and setup
-  redhat_subscription:
-    state: present
-    username: root
-    password: {{ rhel_ha_root_user_password }}
-    pool_ids: {{ rhel_ha_pool_id }}
+# - name: Check if subscription is enabled and setup
+#   redhat_subscription:
+#     state: present
+#     username: root
+#     password: {{ rhel_ha_root_user_password }}
+#     pool_ids: {{ rhel_ha_pool_id }}
 
 - name: Install iSCSI utils
   ansible.builtin.yum:
