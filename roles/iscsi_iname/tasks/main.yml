@@ -30,7 +30,5 @@
     line: "InitiatorName={{ iscsi_iname }}"
   when: test_grep.stdout == "0"
 
-- name: Create a backup of the 
-
 
 
