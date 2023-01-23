@@ -7,3 +7,16 @@
     show_nodes: true
     discover: true
     ip: "{{ iscsi_target_ip }}"
+  register: command_output
+
+- set_fact:
+    iscsi_target: "{{ command_output.stdout }}"
+
+- debug: msg="{{ iscsi_iname }}"
+
+
+# - name: Discover targets on portal and login to the one available
+#   community.general.open_iscsi:
+#     portal: '{{ iscsi_target }}'
+#     login: true
+#     discover: true
