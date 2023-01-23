@@ -103,3 +103,9 @@
   ansible.builtin.service:
     name: pcsd
     state: started
+
+- name: Permit traffic in default zone for http service
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled
