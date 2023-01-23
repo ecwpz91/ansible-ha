@@ -9,10 +9,10 @@
     ip: "{{ iscsi_target_ip }}"
   register: command_output
 
-- debug: msg="{{ command_output.nodes }}"
+# - debug: msg="{{ command_output.nodes }}"
 
 - set_fact:
-    iscsi_target: "{{ command_output.stdout }}"
+    iscsi_target: "{{ command_output.nodes }}"
 
 - debug: msg="{{ iscsi_target }}"
 
