@@ -1,19 +1,11 @@
 ---
-# tasks file for ha_deploy
 
-# - name: Check if subscription is enabled and setup
-#   redhat_subscription:
-#     state: present
-#     username: root
-#     password: {{ rhel_ha_root_user_password }}
-#     pool_ids: {{ rhel_ha_pool_id }}
-
-- name: Install iSCSI utils
+- name: Install iscsi client utils
   ansible.builtin.yum:
     name: iscsi-initiator-utils
     state: latest
 
-- name: Create variable from command
+- name: Create initiatorname variable from command
   command: "/sbin/iscsi-iname"
   register: command_output
 
@@ -22,22 +14,23 @@
 
 - debug: msg="{{iscsi_iname}}"
 
-- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+- name: Touch initiatorname file (create if does not exist)
   ansible.builtin.file:
     path: /etc/iscsi/initiatorname.iscsi
     state: touch
     mode: u=rw,g=r,o=r
 
-- name: Test for line
+- name: Test for initiatorname line
   shell: grep -c "InitiatorName={{ iscsi_iname }}" /etc/iscsi/initiatorname.iscsi || true
   register: test_grep
 
-- name: Add a line to a file if the file does not exist, without passing regexp
+- name: Add a line to a file if the file does not exist
   ansible.builtin.lineinfile:
     path: /etc/iscsi/initiatorname.iscsi
     line: "InitiatorName={{ iscsi_iname }}"
   when: test_grep.stdout == "0"
 
+- name: Create a backup of the 
 
 
 
