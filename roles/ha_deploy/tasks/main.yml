@@ -12,12 +12,32 @@
   ansible.builtin.yum:
     name: iscsi-initiator-utils
     state: latest
-    
+
+- name: Create variable from command
+  command: "/sbin/iscsi-iname"
+  register: command_output
+
+- set_fact:
+    iscsi_iname: "{{ command_output.stdout }}"
+
+- debug: msg="{{iscsi_iname}}"
+
+- name: Ensure file exists
+  copy:
+    content: "InitiatorName={{ iscsi_iname }}"
+    dest: /etc/iscsi/initiatorname.iscsi
+    force: false
+    group: root
+    owner: root
+    mode: 0644
+
 - name: Create initiator name
   ansible.builtin.copy:
     src: /etc/iscsi/initiatorname.iscsi
-    dest: /tmp/initiatorname.iscsi
+    dest: "/etc/iscsi/initiatorname.iscsi.{{ date }}"
     owner: root
     group: root
     mode: '0644'
     backup: yes
+
+
