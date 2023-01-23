@@ -16,9 +16,8 @@
 
 - debug: msg="{{ iscsi_target }}"
 
-
-# - name: Discover targets on portal and login to the one available
-#   community.general.open_iscsi:
-#     portal: '{{ iscsi_target }}'
-#     login: true
-#     discover: true
+- name: Discover targets on portal and login to the one available
+  community.general.open_iscsi:
+    portal: '{{ iscsi_target }}'
+    login: true
+    discover: true
