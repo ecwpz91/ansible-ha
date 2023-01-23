@@ -35,12 +35,9 @@
     src: /etc/iscsi/initiatorname.iscsi
   register: slurped_user_data
 
-- name: Decode data and store as fact # You can skip this if you want to use the right hand side directly...
+- name: Decode data and store as fact
   set_fact:
     iscsi_iname: "{{ slurped_user_data.content | b64decode | trim }}"
-
-# - ansible.builtin.debug:
-#     msg: "the value of initiatorname.iscsi is {{lookup('ansible.builtin.file', '/etc/iscsi/initiatorname.iscsi') }}"
 
 - debug: msg="{{iscsi_iname}}"
   
