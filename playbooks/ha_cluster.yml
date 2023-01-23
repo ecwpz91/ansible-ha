@@ -1,5 +1,7 @@
 - name: Deploy a cluster
   hosts: all
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
   tasks:
     - name: Create unique id for the environment
       block:
