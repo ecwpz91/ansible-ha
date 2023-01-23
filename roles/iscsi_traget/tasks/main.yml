@@ -5,3 +5,6 @@
 - debug: msg="{{ inventory_hostname }}"
 
 - debug: msg="{{ ansible_hostname}}"
+
+- name: Add iscsi iname to target acls
+  command: "targetcli /iscsi/iqn.2003-01.org.linux-iscsi.{{ inventory_hostname }}.x8664:sn.b45da36c2c1a/tpg1/acls create {{ iscsi_iname }}"
