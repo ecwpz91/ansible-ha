@@ -51,3 +51,7 @@
     path: /etc/fstab
     line: "/dev/vg_apache/lv_apache /var/www ext4 defaults,_netdev,nofail 0 2"
   when: test_grep.stdout == "0"
+
+- name: Enable a RHSM repository
+  community.general.rhsm_repository:
+    name: rhel-9-for-x86_64-highavailability-rpms
