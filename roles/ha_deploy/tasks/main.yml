@@ -32,6 +32,11 @@
   ansible.builtin.lineinfile:
     path: /etc/iscsi/initiatorname.iscsi
     line: "InitiatorName={{ iscsi_iname }}"
+    state: present
+  check_mode: yes
+  register: conf
+  failed_when: (conf is changed) or (conf is failed)
+
 
 
 
