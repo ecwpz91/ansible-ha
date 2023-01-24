@@ -62,3 +62,12 @@
   ansible.builtin.template:
     src: templates/status.conf.j2
     dest: /etc/httpd/conf.d/status.conf
+
+- name: Edit the logrotate script supplied with apache so that it does not use systemctl to reload apache
+  command: /bin/systemctl reload httpd.service > /dev/null 2>/dev/null || true
+
+- name: Edit the logrotate script supplied with apache so that it does not use systemctl to reload apache
+  command: |
+    /usr/bin/test -f /run/httpd.pid >/dev/null 2>/dev/null
+    /usr/bin/ps -q $(/usr/bin/cat /run/httpd.pid) >/dev/null 2>/dev/null
+    /usr/sbin/httpd -f /etc/httpd/conf/httpd.conf -c "PidFile /run/httpd.pid" -k graceful > /dev/null 2>/dev/null || true
